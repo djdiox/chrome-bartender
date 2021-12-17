@@ -1,34 +1,25 @@
-{
-  "manifest_version": 2,
+  {
   "name": "__MSG_extName__",
-  "homepage_url": "http://localhost:8080/",
-  "description": "A Vue Browser Extension",
+  "description": "__MSG_extDesc__",
+  "version": "0.0.0",
+  "manifest_version": 3,
+  "homepage_url": "https://github.com/hankxdev/one-click-extensions-manager",
   "default_locale": "en",
   "permissions": [
-    "<all_urls>",
-    "*://*/*"
+    "management"
   ],
   "icons": {
-    "16": "icons/16.png",
-    "48": "icons/48.png",
-    "128": "icons/128.png"
+    "16": "logo.png",
+    "128": "logo.png"
   },
-  "background": {
-    "scripts": [
-      "js/background.js"
-    ],
-    "persistent": false
-  },
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_title": "__MSG_extName__",
-    "default_icon": {
-      "19": "icons/19.png",
-      "38": "icons/38.png"
-    }
+  "action": {
+    "default_icon": "logo.png",
+    "default_popup": "index.html?type=popup"
   },
   "options_ui": {
-    "page": "options.html",
-    "browser_style": true
+    "page": "index.html"
+  },
+  "commands": {
+    "_execute_action": {}
   }
 }
