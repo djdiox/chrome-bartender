@@ -15,3 +15,14 @@ Including the hottest features from the beloved App
 - Control Media
 
 ## Development
+
+### Requirements
+
+- node.js
+- yarn
+- Chrome
+
+## Debug locally
+
+First install depencies via `yarn`, then run `yarn serve` afterwards open Chrome with the [Website](chrome://extensions).
+Press the button `Load unpacked` and select the `.\dist\` folder

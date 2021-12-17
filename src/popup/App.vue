@@ -10,13 +10,14 @@
 
 <script>
 // import HelloWorld from '@/components/HelloWorld.vue'
-import chromeP from 'webext-polyfill-kinda'
+import chromeP from 'webext-polyfill-kinda';
 export default {
   name: 'App',
   data() {
     extensions: []
   },
   async mounted() {
+    console.log('Loaded App');
     debugger;
     try {
      	var extensions = (await chromeP.management.getAll())

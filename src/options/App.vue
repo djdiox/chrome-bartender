@@ -1,5 +1,8 @@
 <template>
-  <hello-world />
+ <div>
+    <hello-world />
+    <h2>Select Behaviour</h2>
+ </div>
 </template>
 
 <script>

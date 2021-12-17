@@ -1,0 +1,26 @@
+{
+    "name": "extension-bartender",
+    "description": "Bartender Style Extension Bar",
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "homepage_url": "https://github.com/djdiox/chrome-bartender",
+    "default_locale": "en",
+    "permissions": [
+        "management"
+    ],
+    "icons": {
+        "16": "icons/16.png",
+        "128": "icons/128.png"
+    },
+    "action": {
+        "default_icon": "favicon.ico",
+        "default_popup": "index.html?type=popup"
+    },
+    "options_ui": {
+        "page": "options.html"
+    },
+    "commands": {
+        "_execute_action": {}
+    },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuK/4rBnaMyZo0r98G9ewK8oKDxZQrDwdWw0Fks+KYYGWSau+xx7Ba5Ib+gPlTMa3Tveylz1NP7XuBLHqUVgkmbGzdOIe3vJZBt2QBn3/2ymmWjpMwW52Zxi7BMj/Yoxgsf71GjapGtsrYGHqZDpOdV+84DNlAku15aQyMThCXEuJ331djYMOijGXS0KoZj0YZuAnYsZVMRXWkzv+sdmkdTLdnBRGtJsMsk+ZLjpUmdMWcvJo43ybNZV9tLGQs4xz+qyFd014y5OQKRR74rJe34RwthRA65FKsalo+0ZRZSmJ/R1PzdwPtpYrKHFcnEZH2hPICVTVQQdaeFR4P0/aqQIDAQAB"
+}
