@@ -11,15 +11,18 @@
 
 <script>
 // import HelloWorld from '@/components/HelloWorld.vue'
-import chromeP from 'webext-polyfill-kinda';
+// import chromeP from 'webext-polyfill-kinda';
+import ExtensionController from '../controllers/extension-controller';
+var extController = new ExtensionController();
 export default {
   name: 'App',
   data() {
     extensions: []
   },
   async mounted() {
-    console.log('Loaded App');
-    debugger;
+    console.log('Loaded App')
+    var current = await this.extensionController.refreshExtensions();
+    this.extensions = current;
     // try {
     //  	var extensions = (await chromeP.management.getAll())
 		// 	.filter(({type, id}) => type === 'extension' && id !== myid)

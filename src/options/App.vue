@@ -3,7 +3,7 @@
     <h2>Select Behaviour</h2>
     <ul>
       <li v-for="extension in extensions" :key="extension.id">
-       <a :href="`chrome://extensions/?id=${extension.id}`" target="_blank">
+       <a href="#" @click.stop="openTab">
           {{extension.shortName}}
        </a>
       </li>
@@ -12,7 +12,9 @@
 </template>
 
 <script>
-import chromeP from 'webext-polyfill-kinda';
+import ExtensionController from '../controllers/extension-controller'
+// import chromeP from 'webext-polyfill-kinda';q
+var extensionsController = new ExtensionController();
 export default {
   name: 'App',
   data() {
@@ -20,10 +22,20 @@ export default {
       extensions: []
     }
   },
+  methods: {
+    openInTab(event) {
+      console.log('Opening', event);
+      chrome.tabs.create({url: event.currentTarget.href});
+      event.preventDefault();
+    }
+  },
   async mounted() {
-    const extensions = await chromeP.management.getAll();
+    const current = await extensionsController.refreshExtensions();
+    this.extensions = current;  
+    debugger;
+    // const extensions = await chromeP.management.getAll();
     console.log('Retrieved extensions', extensions);
-    this.extensions = extensions;
+    // this.extensions = extensions;
   }
 }
 </script>
