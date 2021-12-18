@@ -1,16 +1,30 @@
 <template>
  <div>
-    <hello-world />
     <h2>Select Behaviour</h2>
+    <ul>
+      <li v-for="extension in extensions" :key="extension.id">
+       <a :href="`chrome://extensions/?id=${extension.id}`" target="_blank">
+          {{extension.shortName}}
+       </a>
+      </li>
+    </ul>
  </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import chromeP from 'webext-polyfill-kinda';
 export default {
   name: 'App',
-  components: { HelloWorld }
+  data() {
+    return {
+      extensions: []
+    }
+  },
+  async mounted() {
+    const extensions = await chromeP.management.getAll();
+    console.log('Retrieved extensions', extensions);
+    this.extensions = extensions;
+  }
 }
 </script>
 
