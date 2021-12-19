@@ -24,7 +24,7 @@ export default {
     }
   },
   async mounted() {
-    this.extensions = await chromeP.management.getAll()
+    // this.extensions = await chromeP.management.getAll()
   }
 }
 </script>

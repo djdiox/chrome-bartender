@@ -2,10 +2,15 @@
  <div>
     <h2>Select Behaviour</h2>
     <ul>
-      <li v-for="extension in extensions" :key="extension.id">
-       <a href="#" @click.stop="openTab">
-          {{extension.shortName}}
+      <li v-for="extension in extensions" :key="extension.id" style="padding:5px">
+      <div style="display:flex">
+       <img :src="getIcon(extension)" :alt="extension.shortName" style="margin-right:5px;width:16px;height:16px">
+         <a :href="`chrome://extensions/?id=${extension.id}`"  @click.stop="openTab">
+          {{extension.shortName}} 
        </a>
+       <input type="checkbox" name="enabled" :checked="extension.enabled" style="">
+       <!-- <i class="fas fa-cog"></i> -->
+      </div>
       </li>
     </ul>
  </div>
@@ -13,28 +18,37 @@
 
 <script>
 import ExtensionController from '../controllers/extension-controller'
-// import chromeP from 'webext-polyfill-kinda';q
+// import chromeP from 'webext-polyfill-kinda';
 var extensionsController = new ExtensionController();
 export default {
   name: 'App',
   data() {
     return {
-      extensions: []
+      extensions: [],
     }
   },
   methods: {
-    openInTab(event) {
+    openTab(event) {
       console.log('Opening', event);
       chrome.tabs.create({url: event.currentTarget.href});
       event.preventDefault();
+    },
+    getIcon(extension) {
+      if(!extension.icons || extension.icons.length == 0) {
+        return '';
+      }
+      const icon = extension.icons[0];
+      return icon.url;
     }
   },
   async mounted() {
-    const current = await extensionsController.refreshExtensions();
-    this.extensions = current;  
-    debugger;
+    const ext = await extensionsController.refreshExtensions();
+    console.log('Retrieved', ext)
+    const current = ext.filter(e => e.enabled)
+    
+    this.extensions = [...ext.filter(e => e.enabled), ...ext.filter(e => !e.enabled)];  
     // const extensions = await chromeP.management.getAll();
-    console.log('Retrieved extensions', extensions);
+    console.log('Retrieved extensions', current);
     // this.extensions = extensions;
   }
 }
