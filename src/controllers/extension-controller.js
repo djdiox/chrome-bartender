@@ -17,16 +17,16 @@ export default class ExtensionController {
         var current = await chromeP.management.getAll();
         console.log('Loaded extensions', current);
         return current
-            .filter(({ type, id }) => type === 'extension')
+            // .filter(({ type, id }) => type === 'extension')
             .map(ext => {
                 return { ...ext, loaded: new Date() };
             })
             .sort((a, b) => {
-				if (a.enabled === b.enabled) {
-					return a.name.localeCompare(b.name); // Sort by name
-				}
-				return a.enabled < b.enabled ? 1 : -1; // Sort by state
-			});
+                if (a.enabled === b.enabled) {
+                    return a.name.localeCompare(b.name); // Sort by name
+                }
+                return a.enabled < b.enabled ? 1 : -1; // Sort by state
+            });
     }
 
     async openInTab(event, url) {
