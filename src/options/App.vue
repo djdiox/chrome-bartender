@@ -17,9 +17,6 @@
       </div>
       </li>
     </ul>
-    dov 
-
-    <!--  -->
  </div>
 </template>
 

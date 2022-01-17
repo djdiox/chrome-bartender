@@ -6,6 +6,22 @@
       <input type="text" name="searchInput" id="searchInput" @keyup="search" />
       <button @click="search">Search</button>
     </div>
+    <ul>
+      <li v-for="extension in extensions" :key="extension.id" style="padding:5px">
+      <div style="display:flex">
+       <img :src="getIcon(extension)" :alt="extension.shortName" style="margin-right:5px;width:16px;height:16px">
+         <a :href="`chrome://extensions/?id=${extension.id}`"  @click.stop="openTab">
+          {{extension.shortName}} 
+       </a>
+       <input type="checkbox" name="enabled" :checked="extension.enabled" v-model="extension.enabled" @change="toggleExtension(extension)">
+       <button v-if="extension.isApp" :id="'linkApp' + extension.id" @click="createShortcut(extension)">
+         Create Shortcut
+         <!-- <i class="fas fa-desktop"></i> -->
+       </button>
+       <!-- <i class="fas fa-cog"></i> -->
+      </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -13,7 +29,7 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 // import chromeP from 'webext-polyfill-kinda';
 import ExtensionController from '../controllers/extension-controller';
-var extController = new ExtensionController();
+var extensionController = new ExtensionController();
 export default {
   name: 'App',
   data() {
@@ -21,7 +37,7 @@ export default {
   },
   async mounted() {
     console.log('Loaded App')
-    var current = await this.extensionController.refreshExtensions();
+    var current = await extensionController.refreshExtensions();
     this.extensions = current;
     // try {
     //  	var extensions = (await chromeP.management.getAll())
